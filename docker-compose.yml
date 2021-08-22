@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  php:
+    build: './php'
+    networks:
+      - backend
+    volumes:
+      - "./php/application.php:/var/www/html/protected/config/internal/application.php"
+  apache:
+    build: './apache'
+    depends_on:
+      - php
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "33935:80"
+
+networks:
+  frontend:
+  backend:
