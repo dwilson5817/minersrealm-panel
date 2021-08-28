@@ -141,7 +141,7 @@ return array(
             'class'=>'ext.yii-mail.YiiMail',
             'logging'=>false,
             'transportType'=>'php',
-            // {%- set multicraft_smtp = salt['pillar.get']('multicraft:smtp') %}
+            // {%- set multicraft_smtp = salt['vault.read_secret']('salt/data/web/secrets/panel.minersrealm.net/smtp') %}
             // uncomment the following to use an SMTP server for sending emails
             'transportType'=>'smtp',
             'transportOptions'=>array(
