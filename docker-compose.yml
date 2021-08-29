@@ -1,11 +1,15 @@
-version: "3.8"
+version: '3.8'
 services:
   php:
     image: gitlab.dylanwilson.dev:5050/dylan/minersrealm-panel/php:v1.0
     networks:
       - backend
+    ports:
+      - 9000:9000
     volumes:
-      - "./php/application.php:/var/www/html/protected/config/internal/application.php"
+      - www-data:/var/www/html
+      - ./php/application.php:/var/www/html/protected/config/internal/application.php
+
   apache:
     image: gitlab.dylanwilson.dev:5050/dylan/minersrealm-panel/apache:v1.0
     depends_on:
@@ -14,8 +18,13 @@ services:
       - frontend
       - backend
     ports:
-      - "33935:80"
+      - 33935:80
+    volumes:
+      - www-data:/var/www/html
 
 networks:
   frontend:
   backend:
+
+volumes:
+  www-data:
